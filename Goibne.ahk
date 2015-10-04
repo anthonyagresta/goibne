@@ -3,6 +3,7 @@
 ; Language:       English
 ; Platform:       Win9x/NT
 ; Author:         Anthony Agresta <me@anthonyagresta.com>
+; License:        GPLv3
 ;
 ; Gobine, the Legendary Blacksmith
 ; This script is an attempt to automate Mabinogi's smithing mini-game.
