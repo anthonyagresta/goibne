@@ -1,4 +1,4 @@
-## Gobine, the Legendary Blacksmith
+## Goibne, the Legendary Blacksmith
 This script is an attempt to automate Mabinogi's smithing mini-game.
 
 *For it to work, set the game client's UI skin to "Electric Gray (Opaque)".*
