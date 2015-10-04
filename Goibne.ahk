@@ -22,9 +22,6 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-CoordMode, Pixel, Screen
-CoordMode, Mouse, Screen
-
 ;Autohotkey scope rules are stupid and I'm in a hurry
 global WindowOriginX := 0
 global WindowOriginY := 0
@@ -42,17 +39,18 @@ global FountPointY := 0
 main() {
 	InitMabiWindow()
 	ClickStart()
-	Sleep 7000
+	Sleep 10000
 	FindTopLeft()
 	FindBottomRight()
+	Sleep 2800
 	ClickAnX()
-	Sleep 1000
+	Sleep 2800
 	ClickAnX()
-	Sleep 1000
+	Sleep 2800
 	ClickAnX()
-	Sleep 1000
+	Sleep 2800
 	ClickAnX()
-	Sleep 1000
+	Sleep 2800
 	ClickAnX()
 }
 
@@ -106,6 +104,8 @@ ClickAnX() {
 		MouseMove FoundPointX, FoundPointY
 		Sleep 120
 		Click 
+		Sleep 130
+		MouseMove WindowOriginX, WindowOriginY
 	}
 }
 
@@ -123,5 +123,6 @@ ClickStart() {
 		MouseMove FoundPointX, FoundPointY
 		Sleep 120
 		Click 
+		Sleep 130
 	}	
 }
