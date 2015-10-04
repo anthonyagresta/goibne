@@ -3,6 +3,9 @@ This script is an attempt to automate Mabinogi's smithing mini-game.
 
 *For it to work, set the game client's UI skin to "Electric Gray (Opaque)".*
 
+Note: It's probably obvious, but using this script is probably against the Nexon TOS.
+Use it at your own risk.
+
 ### Usage:
  * Requires a relatively recent copy of [AutoHotKey](http://www.autohotkey.com/)
  * Compile `Goibne.ahk` to a standalone EXE, and run the resulting `Goibne.exe` as admin.
