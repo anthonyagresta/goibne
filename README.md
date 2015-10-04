@@ -10,7 +10,7 @@ This script is an attempt to automate Mabinogi's smithing mini-game.
  * Choose a finishing option
  * Add finishing materials to the window. The Start button should be lit up.
  * Click outside the Mabinogi window and press Ctrl-Alt-M
- * Wait. Smithing should proceed perfectly!...ish!
+ * Wait, and **DON'T TOUCH THE MOUSE!** Smithing should proceed perfectly!...ish!
  
 ### Still to do...
  * I think I'd like to add the Tailoring minigame next.
