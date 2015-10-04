@@ -6,7 +6,15 @@
 ;
 ; Gobine, the Legendary Blacksmith
 ; This script is an attempt to automate Mabinogi's smithing mini-game.
+; Best used with the game client's UI skin set to "Electric Gray (Opaque)". 
 ; 
+; Usage:
+;   Compile to a standalone EXE, and run Goibne.exe as admin.
+;   Open the blacksmithing window
+;   Choose a finishing option
+;   Add finishing materials to the window
+;   Click outside the Mabinogi window and press Ctrl-Alt-M
+;   Wait. Smithing should proceed perfectly! (Should.) 
 ;
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
@@ -14,8 +22,8 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-CoordMode, Pixel, Client
-CoordMode, Mouse, Client
+CoordMode, Pixel, Screen
+CoordMode, Mouse, Screen
 
 ;Autohotkey scope rules are stupid and I'm in a hurry
 global WindowOriginX := 0
@@ -26,13 +34,26 @@ global TopLeftX := 0
 global TopLeftY := 0
 global BottomRightX := 0
 global BottomRightY := 0
+global FoundPointX := 0
+global FountPointY := 0
 
 ^!m::main()
 
 main() {
 	InitMabiWindow()
+	ClickStart()
+	Sleep 7000
 	FindTopLeft()
-
+	FindBottomRight()
+	ClickAnX()
+	Sleep 1000
+	ClickAnX()
+	Sleep 1000
+	ClickAnX()
+	Sleep 1000
+	ClickAnX()
+	Sleep 1000
+	ClickAnX()
 }
 
 InitMabiWindow() {
@@ -40,21 +61,67 @@ InitMabiWindow() {
 	IfWinExist, Mabinogi
 	{
 		WinActivate
-		WinGetPos,WindowOriginX,WindowOriginY,WindowEndX,WindowEndY
+		WinGetPos,,,WindowEndX,WindowEndY
+		Sleep 400
 	}
 }
 
-
 FindTopLeft() {
-	ImageSearch, TopLeftX, TopLeftY, WindowOriginX, WindowOriginY, WindowEndX, WindowEndY, *50 *Trans0x292929 img\topleft.bmp
+	ImageSearch, TopLeftX, TopLeftY, WindowOriginX, WindowOriginY, WindowEndX, WindowEndY, *100 *Trans0x292929 img\topleft.bmp
 	if(ErrorLevel == 2) {
 		MsgBox, Couldn't Open %A_WorkingDir%\img\topleft.bmp
 	} else if(ErrorLevel == 1) {
-		MsgBox, Blacksmithing UI not found.
+		MsgBox, Blacksmithing UI TopLeft not found.
 	} else {
 		MouseMove TopLeftX, TopLeftY
 		Sleep 120
-		Click 
-		MsgBox, Found at (%TopLeftX% %TopLeftY%)
 	}
+}
+
+FindBottomRight() {
+	ImageSearch, BottomRightX, BottomRightY, TopLeftX, TopLeftY, WindowEndX, WindowEndY, *100 *Trans0x212121 img\bottomright.bmp
+	if(ErrorLevel == 2) {
+		MsgBox, Couldn't Open %A_WorkingDir%\img\bottomright.bmp
+	} else if(ErrorLevel == 1) {
+		MsgBox, Blacksmithing UI BottomRight not found.
+	} else {
+		BottomRightX := BottomRightX + 9
+		BottomRightY := BottomRightY + 9
+		MouseMove BottomRightX, BottomRightY
+		Sleep 120
+	}	
+}
+
+ClickAnX() {
+	FoundPointX := 0
+	FoundPointY := 0
+	ImageSearch, FoundPointX, FoundPointY, TopLeftX, TopLeftY, BottomRightX, BottomRightY, *Trans0x000000 img\x.bmp
+	if(ErrorLevel == 2) {
+		MsgBox, Couldn't Open %A_WorkingDir%\img\x.bmp
+	} else if(ErrorLevel == 1) {
+		MsgBox, Blacksmithing UI X Mark not found.
+	} else {
+		FoundPointX := FoundPointX + 4
+		FoundPointY := FoundPointY + 4
+		MouseMove FoundPointX, FoundPointY
+		Sleep 120
+		Click 
+	}
+}
+
+ClickStart() {
+	FoundPointX := 0
+	FoundPointY := 0
+	ImageSearch, FoundPointX, FoundPointY, WindowOriginX, WindowOriginY, WindowEndX, WindowEndY, img\start.bmp
+	if(ErrorLevel == 2) {
+		MsgBox, Couldn't Open %A_WorkingDir%\img\start.bmp
+	} else if(ErrorLevel == 1) {
+		MsgBox, Blacksmithing UI Start Button not found.
+	} else {
+		FoundPointX := FoundPointX + 4
+		FoundPointY := FoundPointY + 4
+		MouseMove FoundPointX, FoundPointY
+		Sleep 120
+		Click 
+	}	
 }
