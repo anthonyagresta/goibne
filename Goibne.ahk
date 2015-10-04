@@ -39,19 +39,13 @@ global FountPointY := 0
 main() {
 	InitMabiWindow()
 	ClickStart()
-	Sleep 10000
+	Sleep 4000
 	FindTopLeft()
 	FindBottomRight()
-	Sleep 2800
-	ClickAnX()
-	Sleep 2800
-	ClickAnX()
-	Sleep 2800
-	ClickAnX()
-	Sleep 2800
-	ClickAnX()
-	Sleep 2800
-	ClickAnX()
+	Loop, 5 {
+		WaitForTheBarToBeGreen()
+		ClickAnX()
+	}
 }
 
 InitMabiWindow() {
@@ -99,13 +93,14 @@ ClickAnX() {
 	} else if(ErrorLevel == 1) {
 		MsgBox, Blacksmithing UI X Mark not found.
 	} else {
-		FoundPointX := FoundPointX + 4
-		FoundPointY := FoundPointY + 4
+		FoundPointX := FoundPointX + 5
+		FoundPointY := FoundPointY + 5
 		MouseMove FoundPointX, FoundPointY
 		Sleep 120
 		Click 
 		Sleep 130
 		MouseMove WindowOriginX, WindowOriginY
+		Sleep 500
 	}
 }
 
@@ -118,11 +113,25 @@ ClickStart() {
 	} else if(ErrorLevel == 1) {
 		MsgBox, Blacksmithing UI Start Button not found.
 	} else {
-		FoundPointX := FoundPointX + 4
-		FoundPointY := FoundPointY + 4
 		MouseMove FoundPointX, FoundPointY
 		Sleep 120
+		MouseMove FoundPointX, FoundPointY
 		Click 
 		Sleep 130
 	}	
+}
+
+WaitForTheBarToBeGreen() {
+	CheckPointX := TopLeftX + 162
+	CheckPointY := TopLeftY + 221
+	MouseMove, CheckPointX, CheckPointY
+	Sleep 100
+	MouseMove, 0, 30, 2, R
+	Sleep 25
+	MyPixelColor = 000000
+	While, MyPixelColor != 0x61790D
+	{
+		Sleep 25
+		PixelGetColor, MyPixelColor, CheckPointX, CheckPointY, Slow RGB
+	}
 }
