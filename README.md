@@ -14,6 +14,7 @@ This script is an attempt to automate Mabinogi's smithing mini-game.
  
 ### Still to do...
  * I think I'd like to add the Tailoring minigame next.
+ * Clicking the start button is a little janky atm, depends on the client skin.
  * Smithing doesn't seem to have perfect accuracy yet. It could be the client forces you to be a little off. Not sure.
  
 ### License
